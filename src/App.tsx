@@ -2,6 +2,14 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function myButton() {
+    return (
+        <button>
+            i am a button
+        </button>
+    )
+}
+
 function App() {
   return (
     <div className="App">
@@ -23,4 +31,6 @@ function App() {
   );
 }
 
-export default App;
+export default function Square() {
+    return <button className="square">x</button>
+}
