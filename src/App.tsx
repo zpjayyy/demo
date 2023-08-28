@@ -1,44 +1,23 @@
-import {useState} from "react";
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react"
+import Button from '@mui/material/Button'
+import './App.css'
 
-function myButton() {
-    return (
-        <button>
-            i am a button
-        </button>
-    )
+interface SquareProps {
+    value?: string
+    onSquareClick?: any
 }
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
+interface BoardProps {
+    xIsNext: boolean
+    squares: string[]
+    onPlay: any
 }
 
-function Square(props: {value?: string, onSquareClick?: any}) {
-    return <button className="square" onClick={props.onSquareClick}>{props.value}</button>
+function Square({value, onSquareClick}: SquareProps) {
+    return <Button variant="outlined" onClick={onSquareClick}>{value}</Button>
 }
-function Board(props: {xIsNext: boolean, squares: string[], onPlay: any}) {
-    const squares = props.squares
-    const xIsNext = props.xIsNext
-    const onPlay = props.onPlay
 
+function Board({xIsNext, squares, onPlay}: BoardProps) {
     function handleClick(i: number) {
         if (squares[i] || calculateWinner(squares)) {
             return
@@ -107,7 +86,7 @@ export default function Game() {
     const [history, setHistory] = useState([Array(9).fill(null)])
     const [currentMove, setCurrentMove] = useState(0)
     const currentSquares = history[currentMove]
-    const xIsNext = currentMove % 2 ===0
+    const xIsNext = currentMove % 2 === 0
 
     function handlePlay(nextSquares: string[]) {
         const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]
